@@ -1,0 +1,71 @@
+.line{
+    width:150px;
+}
+.navbar-fixed-top {
+     min-height: 85px;
+ }
+
+.navbar-nav > li > a {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    line-height: 85px;
+    font-size: 16px;
+}
+
+@media (max-width: 767px) {
+    .navbar-nav > li > a {
+        line-height: 20px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        font-size: 14px}
+    .navbar-toggle > span {
+        height: 85px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;}
+}
+@media (max-width: 900px) {
+    .score{
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+    }
+}
+@media (min-width: 967px) {
+    .score{
+        height: 175px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+    }
+}
+/*
+.card {
+    background-color: white;
+    border:1px solid #AAA;
+    padding:0px;
+    margin:15px;
+    overflow:hidden;
+}
+.card p {
+    margin:0px;
+    background-color: #000000;
+    padding:10px;
+}
+.card-image {
+    background-size: cover;
+    height: 200px;
+    padding:0px;
+    margin:0px;
+    background-position:center;
+    position:relative;
+    overflow:hidden;
+}
+.player-image{
+    width: 100%;
+}
+*/
