@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="devaldo_rojo_web_app">
 <head lang="en">
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/bootstrap.css"/>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/styles.css"/>
     <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular.min.js"></script>
+    <script src="js/ParseCtrl.js"></script>
 </head>
-<body>
+<body ng-controller="ParseCtrl">
 <div class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -16,9 +18,9 @@
             </button>
         </div>
         <div class="hidden-xs "><a class="navbar-brand"><img data-0="max-height:600%; max-width:600%"
-                                     data-20="max-height:300%; max-width:300%;"
-                                     class="img-responsive center-block"
-                                     src="img/logo/Devaldo_Rojo_Temp.png"> </img></a></div>
+                                                             data-20="max-height:300%; max-width:300%;"
+                                                             class="img-responsive center-block"
+                                                             src="img/logo/Devaldo_Rojo_Temp.png"> </img></a></div>
         <div class="navbar-collapse collapse" id="navbar-main">
             <ul class="nav navbar-nav">
                 <li>
@@ -89,52 +91,27 @@
         </div>
 
     </div>
-    <div class="row">
+    <div class="row" ng-init="getPlayers()">
         <h1 class="text-center"> Spelersoverzicht</h1>
         <hr class="divider ">
-        <div class="col-xs-3">
-            <img src="img/players/Frederique.PNG" class="img-responsive img-circle center-block">
+        <div ng-repeat="player in players.results">
+            <div class="col-xs-3" ng-if="$index<4">
+                <img src="{{player.speler_image.url}}" class="img-responsive img-circle center-block">
 
-            <p class="text-center">FREDERIQUE</p>
-        </div>
-        <div class="col-xs-3">
-            <img src="img/players/Elias.PNG" class="img-responsive img-circle center-block">
-
-            <p class="text-center">ELIAS</p>
-        </div>
-        <div class="col-xs-3">
-            <img src="img/players/Jeroen.PNG" class="img-responsive img-circle center-block">
-
-            <p class="text-center">JEROEN</p>
-        </div>
-        <div class="col-xs-3">
-            <img src="img/players/Pieter.PNG" class="img-responsive img-circle center-block">
-
-            <p class="text-center">PIETER</p>
+                <p class="text-center">{{player.naam}}</p>
+            </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-3">
-            <img src="img/players/Giel.PNG" class="img-responsive img-circle center-block">
+        <div ng-repeat="player in players.results">
+            <div class="col-xs-3" ng-if="$index>=4">
+                <img src="{{player.speler_image.url}}" class="img-responsive img-circle center-block">
 
-            <p class="text-center">GIEL</p>
-        </div>
-        <div class="col-xs-3">
-            <img src="img/players/Jorg.PNG" class="img-responsive img-circle center-block">
-
-            <p class="text-center">JORG</p>
-        </div>
-        <div class="col-xs-3">
-            <img src="img/players/Cedric.PNG" class="img-responsive img-circle center-block">
-
-            <p class="text-center">CEDRIC</p>
-        </div>
-        <div class="col-xs-3">
-            <img src="img/players/Robbe.PNG" class="img-responsive img-circle center-block">
-
-            <p class="text-center">ROBBE</p>
+                <p class="text-center">{{player.naam}}</p>
+            </div>
         </div>
     </div>
+
     <div class="row">
         <h1 class="text-center"> Klassement & Matchen</h1>
         <hr class="divider ">
