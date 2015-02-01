@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/styles.css"/>
     <title></title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.2/angular.min.js"></script>
     <script src="js/ParseCtrl.js"></script>
 </head>
 <body ng-controller="ParseCtrl">
@@ -115,7 +115,7 @@
     <div class="row">
         <h1 class="text-center"> Klassement & Matchen</h1>
         <hr class="divider ">
-        <div class="col-lg-4">
+        <div class="col-lg-6">
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#klassement_tab" data-toggle="tab" aria-expanded="true">Klassement</a>
                 </li>
@@ -135,83 +135,53 @@
                             <th>PTS</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr class="active">
-                            <td>1</td>
-                            <td>Devaldo Rojo</td>
-                            <td>16</td>
-                            <td>2</td>
-                            <td>1</td>
-                            <td>12</td>
-                            <td>7</td>
+                        <tbody ng-init="getRanking()">
+                        <tr class="active" ng-repeat="team in ranking.results| toArray | orderBy:['-gewonnen','-gelijk']">
+                            <td>{{$index +1}}</td>
+                            <td>{{team.team}}</td>
+                            <td>{{team.gewonnen+team.gelijk+team.verloren}}</td>
+                            <td>{{team.gewonnen}}</td>
+                            <td>{{team.gelijk}}</td>
+                            <td>{{team.verloren}}</td>
+                            <td>{{team.gewonnen*3 + team.gelijk}}</td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Devaldo Rojo</td>
-                            <td>16</td>
-                            <td>2</td>
-                            <td>1</td>
-                            <td>12</td>
-                            <td>7</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Devaldo Rojo</td>
-                            <td>16</td>
-                            <td>2</td>
-                            <td>1</td>
-                            <td>12</td>
-                            <td>7</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Devaldo Rojo</td>
-                            <td>16</td>
-                            <td>2</td>
-                            <td>1</td>
-                            <td>12</td>
-                            <td>7</td>
-                        </tr>
-
                         </tbody>
                     </table>
                 </div>
                 <div class="tab-pane fade" id="topscorers">
-                    <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.
-                        Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan
-                        four
-                        loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer
-                        mlkshk
-                        aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore
-                        aesthetic magna delectus mollit.</p>
+                    <ul class="list-group">
+                        <li ng-repeat ="player in players.results|toArray|orderBy:'-doelpunten'"class="list-group-item">
+                            <span class="badge">{{player.doelpunten}}</span>
+                            {{$index +1 + '. ' + player.naam}}
+
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
-
-        <div class="col-lg-4">
+        <div class="col-lg-6">
             <div class="panel panel-default">
                 <div class="panel-heading">Kalender</div>
                 <div class="panel-body">
-                    <ul class="list-group">
-                        <a href="" data-toggle="modal" data-target="#matchinfo" class="list-group-item active">
-                            <span class="badge">31/01</span>
-                            Devaldo Rojo - Sunday Ol Band
-                        </a>
-                        <a href="" data-toggle="modal" data-target="#matchinfo" class="list-group-item">
-                            <span class="badge">12/02</span>
-                            Partizan Gent - Devaldo Rojo
-                        </a>
-                        <a href="#" data-toggle="modal" data-target="#matchinfo" class="list-group-item">
-                            <span class="badge">19/02</span>
-                            Fc Zatletico - Devaldo Rojo
-
-                        </a>
+                    <ul class="list-group" ng-init="getKalender()">
+                        <div ng-repeat="match in kalender.results | toArray | orderBy:'webDate'">
+                            <a ng-if="$index==0" href="" data-toggle="modal" data-target="#matchinfo"
+                               class="list-group-item active">
+                                <span class="badge">{{match.DatumWeb}}</span>
+                                {{match.HomeTeam + ' - ' + match.AwayTeam}}
+                            </a>
+                            <a ng-if="$index >0 && $index <=2" href="" data-toggle="modal" data-target="#matchinfo"
+                               class="list-group-item">
+                                <span class="badge">{{match.DatumWeb}}</span>
+                                {{match.HomeTeam + ' - ' + match.AwayTeam}}
+                            </a>
+                        </div>
                     </ul>
                 </div>
             </div>
         </div>
 
-        <div class="col-lg-4">
+       <!-- <div class="col-lg-4">
             <div class="panel panel-info">
                 <div class="panel-heading">Volgende match</div>
                 <div class="panel-body">
@@ -226,7 +196,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
     <div class="modal fade" id="matchinfo" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
