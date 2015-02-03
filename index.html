@@ -3,7 +3,6 @@
 <head lang="en">
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/bootstrap.css"/>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/styles.css"/>
     <title></title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.2/angular.min.js"></script>
@@ -32,7 +31,7 @@
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#kalender">KALENDER</a></li>
+                <li><a href="#klassement">KALENDER</a></li>
                 <li><a href="#klassement">KLASSEMENT</a></li>
             </ul>
 
@@ -40,7 +39,7 @@
     </div>
 </div>
 <div class="container" style="margin-top: 120px">
-    <div class="row">
+    <div class="row" id="home">
         <h1 class="text-center"> Laatste resultaat</h1>
         <hr class="divider ">
         <h5 class="text-center">Kern Gent De Pinte Reeks 4D </h5>
@@ -91,18 +90,22 @@
         </div>
 
     </div>
-    <div class="row" ng-init="getPlayers()">
-        <h1 class="text-center"> Spelersoverzicht</h1>
-        <hr class="divider ">
-        <div ng-repeat="player in players.results">
-            <div class="col-xs-3" ng-if="$index<4">
-                <img src="{{player.speler_image.url}}" class="img-responsive img-circle center-block">
+    <div data-bottom-top="opacity: 0; transform: translateX(0px);"
+        data-center-bottom="opacity: 1; transform: translateX(0px);" id="players">
+        <div class="row" ng-init="getPlayers()">
+            <h1 class="text-center"> Spelersoverzicht</h1>
+            <hr class="divider ">
+            <div ng-repeat="player in players.results">
+                <div class="col-xs-3" ng-if="$index<4">
+                    <img src="{{player.speler_image.url}}" class="img-responsive img-circle center-block">
 
-                <p class="text-center">{{player.naam}}</p>
+                    <p class="text-center">{{player.naam}}</p>
+                </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row" data-bottom-top="opacity: 0; transform: translateX(0px);"
+    data-center-bottom="opacity: 1; transform: translateX(0px);">
         <div ng-repeat="player in players.results">
             <div class="col-xs-3" ng-if="$index>=4">
                 <img src="{{player.speler_image.url}}" class="img-responsive img-circle center-block">
@@ -112,7 +115,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" id="klassement">
         <h1 class="text-center"> Klassement & Matchen</h1>
         <hr class="divider ">
         <div class="col-lg-6">
@@ -219,6 +222,20 @@
 <script src="js/bootstrap.js"></script>
 <script type="text/javascript" src="js/skrollr.js"></script>
 <script type="text/javascript">
+    $(document).ready(function(){
+	$('a[href^="#"]').on('click',function (e) {
+	    e.preventDefault();
+
+	    var target = this.hash;
+	    var $target = $(target);
+
+	    $('html, body').stop().animate({
+	        'scrollTop': $target.offset().top
+	    }, 900, 'swing', function () {
+	        window.location.hash = target;
+	    });
+	});
+});
     skrollr.init({
         smoothScrolling: false,
         forceHeight: false,
