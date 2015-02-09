@@ -158,14 +158,27 @@
                     <div class="panel-body">
                         <ul class="list-group" ng-init="getKalender()">
                             <div ng-repeat="match in kalender.results | toArray | orderBy:'webDate'">
-                                <a ng-if="$index==0" href="" data-toggle="modal" data-target="#matchinfo" class="list-group-item active">
+                                <a ng-if="$index==0" href="" ng-click="open(match)" class="list-group-item active">
                                     <span class="badge">{{match.DatumWeb}}</span>
                                     {{match.HomeTeam + ' - ' + match.AwayTeam}}
                                 </a>
-                                <a ng-if="$index >0 && $index <=2" href="" data-toggle="modal" data-target="#matchinfo" class="list-group-item">
+                                <a ng-if="$index >0 && $index <=2" href="" ng-click="open(match)" class="list-group-item">
                                     <span class="badge">{{match.DatumWeb}}</span>
                                     {{match.HomeTeam + ' - ' + match.AwayTeam}}
                                 </a>
+                                <script type="text/ng-template" id="myModalContent.html">
+                                    <div class="modal-header">
+                                        <h3>    {{match.HomeTeam + ' - ' + match.AwayTeam}}</h3>
+                                    </div>
+                                    <div class="modal-body">
+                                       Datum : {{match.Datum.iso | date:'dd/MM/yyyy- -HHumm':'UTC'}} <br />
+                                        {{match.Sporthal}}<br/>
+                                        Aanwezig : {{match.aanwezigeSpelers.join(', ')}}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" ng-click="close()">Close</button>
+                                    </div>
+                                </script>
                             </div>
                         </ul>
                     </div>
@@ -188,27 +201,13 @@
             </div>
         </div>
     </div>-->
-            <div class="modal fade" id="matchinfo" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title">Partizan Gent - Devaldo Rojo</h4>
-                        </div>
-                        <div class="modal-body">
-                            Straat, uur ,blabla
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         </div>
 
         <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
         <script src="js/bootstrap.js"></script>
         <script type="text/javascript" src="js/skrollr.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.0/ui-bootstrap-tpls.js"></script>
         <script type="text/javascript">
             $(document).ready(function () {
                 $('a[href^="#"]').on('click', function (e) {

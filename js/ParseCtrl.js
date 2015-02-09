@@ -1,7 +1,7 @@
 /**
  * Created by Fre on 30/01/15.
  */
-var testApp = angular.module('devaldo_rojo_web_app', []);
+var testApp = angular.module('devaldo_rojo_web_app', ['ui.bootstrap']);
 testApp.filter("toArray", function(){
     return function(obj) {
         var result = [];
@@ -10,7 +10,7 @@ testApp.filter("toArray", function(){
         });
         return result;};})
 
-testApp.controller('ParseCtrl', function ($scope,$http) {
+testApp.controller('ParseCtrl', function ($scope,$http,$modal) {
     $scope.players = [];
     $scope.kalender = [];
     $scope.ranking = [];
@@ -53,5 +53,27 @@ testApp.controller('ParseCtrl', function ($scope,$http) {
             .error(function(data, status) {
                 alert(status);
             });
+    }
+
+    $scope.open = function(match){
+        var modalInstance = $modal.open({
+            controller: "ModalInstanceCtrl",
+            templateUrl: 'myModalContent.html',
+            resolve: {
+                match: function()
+                {
+                    return match;
+                }
+            }
+        });
     };
 });
+testApp.controller('ModalInstanceCtrl', function ($scope, $modalInstance, match)
+{
+    $scope.match = match;
+    $scope.close = function () {
+        $modalInstance.close();
+    };
+
+});
+
