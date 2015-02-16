@@ -52,29 +52,3 @@
     margin: auto;
     margin-top: -5px;
 }
-/*
-.card {
-    background-color: white;
-    border:1px solid #AAA;
-    padding:0px;
-    margin:15px;
-    overflow:hidden;
-}
-.card p {
-    margin:0px;
-    background-color: #000000;
-    padding:10px;
-}
-.card-image {
-    background-size: cover;
-    height: 200px;
-    padding:0px;
-    margin:0px;
-    background-position:center;
-    position:relative;
-    overflow:hidden;
-}
-.player-image{
-    width: 100%;
-}
-*/

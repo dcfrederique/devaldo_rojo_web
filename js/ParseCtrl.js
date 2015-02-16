@@ -1,7 +1,7 @@
 /**
  * Created by Fre on 30/01/15.
  */
-var testApp = angular.module('devaldo_rojo_web_app', ['ui.bootstrap']);
+var testApp = angular.module('devaldo_rojo_web_app', ['ui.bootstrap','timer']);
 testApp.filter("toArray", function(){
     return function(obj) {
         var result = [];
@@ -12,6 +12,7 @@ testApp.filter("toArray", function(){
 
 testApp.controller('ParseCtrl', function ($scope,$http,$modal) {
     $scope.players = [];
+    $scope.timerRunning = false;
     $scope.kalender = [];
     $scope.ranking = [];
     $scope.getPlayers = function() {
@@ -34,7 +35,6 @@ testApp.controller('ParseCtrl', function ($scope,$http,$modal) {
             'X-Parse-REST-API-Key':'VTcRHUDuZ2dq3f4IpUIww29KNbdUeigbNgOxpz7S',
             'Content-Type' : 'application/json'}})
             .success(function(data, status) {
-
                 $scope.kalender = data;
             })
             .error(function(data, status) {
